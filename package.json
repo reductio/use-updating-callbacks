@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && rollup -c && cp package.json LICENSE README.md dist/",
+    "publish:test": "npm run build && npm publish dist/ --dry-run",
+    "publish": "npm run build && npm publish dist/",
     "test": "jest"
   },
   "keywords": [
