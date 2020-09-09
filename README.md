@@ -1,5 +1,7 @@
 # Organize callbacks and avoid rerenders
 
+Examples below can be found in this [Sandbox](https://codesandbox.io/s/useupdatingcallbacks-example-hbk5v).
+
 The hooks **useUpdatingCallbacks** and **useUpdatingCallback** can be used to define callback functions that always use the latest closure of the latest rerender, but never change their identity. Let's see this example without the hooks:
 
 ```js
@@ -52,7 +54,7 @@ With the **useUpdatingCallbacks** hook, you can achieve that no rerenders happen
 
 ```js
 import React, { useState } from "react";
-import { useUpdatingCallbacks } from "use-updated-callbacks";
+import { useUpdatingCallbacks } from "use-updating-callbacks";
 
 // Button that shows a console.log message when it's rerendered
 const ScreamingButton = React.memo(({ onClick, children }) => {
