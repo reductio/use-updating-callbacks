@@ -1,12 +1,12 @@
 {
   "name": "use-updating-callbacks",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "React hook to comfortably define callbacks that don't cause rerenders in sub-components",
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && rollup -c && cp package.json LICENSE README.md dist/",
     "publish:test": "npm run build && npm publish dist/ --dry-run",
-    "publish": "npm run build && npm publish dist/",
+    "publish:dist": "npm run build && npm publish dist/",
     "test": "jest"
   },
   "keywords": [
