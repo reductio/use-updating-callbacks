@@ -9,4 +9,5 @@ export default {
     format: "cjs",
     plugins: [terser()],
   },
+  external: ["react"],
 };
