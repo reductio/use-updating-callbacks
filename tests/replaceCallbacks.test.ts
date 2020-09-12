@@ -1,4 +1,5 @@
 import { isExportDeclaration } from "typescript";
+import { wrapUndefinedFunction } from "../src/helpers";
 import replaceCallbacks from "../src/replaceCallbacks";
 
 type Functions = {
@@ -88,5 +89,38 @@ describe("Function Replacement", () => {
     expect(replaced.b(42, 23)).toEqual(function3(42, 23));
     expect(replaced.c.d("hello", "world")).toEqual(function2("hello", "world"));
     expect(replaced.c.e.f(42, 23, "hello")).toEqual(function1(42, 23, "hello"));
+  });
+});
+
+type ReplaceFunctions = {
+  a: () => number;
+};
+
+describe("Replacement with undefined", () => {
+  let withUndefined: ReplaceFunctions;
+  let replaced: ReplaceFunctions;
+
+  beforeEach(() => {
+    withUndefined = {
+      a: wrapUndefinedFunction(() => 42),
+    };
+
+    replaced = replaceCallbacks(() => withUndefined);
+  });
+
+  test("Functions", () => {
+    // assert
+    expect(replaced.a()).toBe(42);
+  });
+
+  test("Replacement with undefined", () => {
+    // act
+    withUndefined = {
+      a: wrapUndefinedFunction<ReplaceFunctions["a"] | undefined>(undefined),
+    };
+
+    // assert
+    expect(typeof replaced.a === "function").toBeTruthy();
+    expect(replaced.a()).toBeUndefined();
   });
 });

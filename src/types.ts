@@ -1,3 +1,5 @@
+export type AnyFunction = (...args: any[]) => any;
+
 export type Callbacks = {
-  [key: string]: ((...args: any[]) => any) | Callbacks;
+  [key: string]: AnyFunction | Callbacks;
 };

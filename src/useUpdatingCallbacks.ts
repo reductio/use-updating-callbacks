@@ -1,5 +1,5 @@
 import { useRef, useEffect, MutableRefObject } from "react";
-import { Callbacks } from "./types";
+import { AnyFunction, Callbacks } from "./types";
 import replaceCallbacks from "./replaceCallbacks";
 
 function useUpdatedRef<T>(
@@ -24,9 +24,7 @@ export function useUpdatingCallbacks<T extends Callbacks>(callbacks: T): T {
   return useUpdatedRef(callbacks, (ref) => replaceCallbacks(() => ref.current));
 }
 
-export function useUpdatingCallback<T extends (...args: any[]) => any>(
-  callback: T
-): T {
+export function useUpdatingCallback<T extends AnyFunction>(callback: T): T {
   return useUpdatedRef(
     callback,
     (ref) => ((...args: any[]) => ref.current(...args)) as T

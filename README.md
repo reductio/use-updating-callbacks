@@ -124,6 +124,26 @@ If you need only one callback you can also use **useUpdatingCallback** instead:
 const onButtonClick = useUpdatingCallback((event) => ...);
 ```
 
+## Callbacks that can be undefined
+
+If your components receives callbacks that can be undefined (and event might change between defined and undefined) and you want to include them in your callbacks object, wrap them in **_wrapUndefinedFunction_**. In the returned callbacks object, the function will then always be defined and will return **undefined** if the original function is not defined.
+
+```js
+import React from "react";
+import {
+  useUpdatingCallbacks,
+  wrapUndefinedFunction,
+} from "use-updating-callbacks";
+
+function App({ onlySometimes }: { onlySometimes?: () => number }) {
+  const callbacks = useUpdatingCallbacks({
+    onlySometimes: wrapUndefinedFunction(onlySometimes),
+  });
+
+  callbacks.onlySometimes(); // always works. Returns undefined if onlySometimes is undefined, otherwise onlySometimes is called normally and the return value is returned here.
+}
+```
+
 ### Reference other callbacks
 
 Of course you can call one callback in another callback:

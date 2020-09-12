@@ -1,6 +1,6 @@
 {
   "name": "use-updating-callbacks",
-  "version": "0.9.3",
+  "version": "0.9.5",
   "description": "React hook to comfortably define callbacks that don't cause rerenders in sub-components",
   "main": "index.js",
   "scripts": {
