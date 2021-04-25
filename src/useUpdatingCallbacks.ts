@@ -24,9 +24,9 @@ export function useUpdatingCallbacks<T extends Callbacks>(callbacks: T): T {
   return useUpdatedRef(callbacks, (ref) => replaceCallbacks(() => ref.current));
 }
 
-export function useUpdatingCallback<T extends AnyFunction>(callback: T): T {
+export function useUpdatingCallback<T extends Function>(callback: T): T {
   return useUpdatedRef(
     callback,
-    (ref) => ((...args: any[]) => ref.current(...args)) as T
+    (ref) => (((...args: any[]) => ref.current(...args)) as unknown) as T
   );
 }
